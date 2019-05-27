@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="/"><button>返回</button></a>
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+
+    {%else%}
+
+    <table align="center" border="1" cellspacing="0" width="50%" >
+        <tbody align="center">
+        <tr>
+            <td colspan="6" align="center" height="50px">病例</td>
+        </tr>
+
+        <tr>
+            <td width="80px" height="50px" style="background-color:#ededed" >姓名</td>
+            <td width="80px">{% for post in man_info %} {{post.name}}{% endfor %}</td>
+            <td width="80px" style="background-color:#ededed">性别</td>
+            <td width="80px">{% for post in man_info %} {{post.gender}}{% endfor %}</td>
+            <td width="80px" style="background-color:#ededed">年龄</td>
+            <td width="80px">{% for post in man_info %} {{post.age}}{% endfor %}</td>         
+        </tr>
+
+        <tr>
+            <td width="80px" height="80px" style="background-color:#ededed" >科别</td>
+            <td width="80px" colspan="2">{% for post in man_info %} {{post.section}}{% endfor %}</td>
+            <td width="80px" style="background-color:#ededed">就诊时间</td>
+            <td width="80px" colspan="2">{% for post in man_info %} {{post.time}}{% endfor %}</td>   
+        </tr>
+
+        <tr>
+            <td width="80px" height="80px" style="background-color:#ededed" >病人主诉</td>
+            <td width="80px" colspan="5">{% for post in man_complain %} {{post}}<br />{% endfor %}</td>
+        </tr>
+        <tr>
+            <td width="80px" height="80px" style="background-color:#ededed" >诊断</td>
+            <td width="80px" colspan="5">{% for post in man_diagnose %} {{post}}<br />{% endfor %}</td>
+        </tr>
+        <tr>
+            <td width="80px" height="80px" style="background-color:#ededed" >处理</td>
+            <td width="80px" colspan="5">{% for post in man_dispose %} {{post}}<br />{% endfor %}</td>
+        </tr>
+
+        </tbody>
+    </table>
+    {% endif %}
+</body>
+</html>

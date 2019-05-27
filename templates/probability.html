@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+
+    <a href="/"><button>返回</button></a><br />
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% else %}
+
+
+    <table align="center" border="1" cellspacing="0" width="50%" >
+        <tbody align="center">
+        <tr>
+            <td width="80px" height="50px" style="background-color:#ededed" >主诉</td>
+            <td width="80px" colspan="2">{{man_complain}}</td>
+        </tr>
+
+        {% for post in all_info %}
+        <tr>
+            {% for one in post %}
+            <td width="80px"><a href="/way" name="text" methods="get">{{one}}</a></td>
+            {% endfor %}        
+        </tr>
+
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+        {{man_complain}}<br />
+
+
+
+
+    {% endif %}
+
+</body>
+</html>

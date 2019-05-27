@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css"/>
+
+</head>
+<body>
+    <h1>欢迎进入病例查询系统</h1>
+
+    <div id="search">
+        <form method="get" action="/personal/">
+            {% csrf_token %}
+            <input name="name" type="text" placeholder="姓名" required>
+            <input name="num" type="text" placeholder="编号" required>
+            <button type="submit">查询个人病例</button>
+        </form>
+
+        <form method="get" action="/probability/">
+            {% csrf_token %}
+            <input name="text" type="text" placeholder="症状" required>
+            <button type="submit">查询得病概率</button>
+        </form>
+    </div>
+
+
+</body>
+</html>
