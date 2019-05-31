@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <title>{{title}}</title>
 </head>
-<body>
-<a>good</a>
+<a href="/"><button>返回主页</button></a><br />
+    {%for post in his_info%}
+    <div>
+        <table align="center" border="1" cellspacing="0" width="50%" >
+
+            <tbody align="center">
+            <tr>
+                <td width="80px" height="50px" >案例{{forloop.counter}}</td>
+            </tr>
+
+            {% for info in post%}
+            <tr>
+                <td width="80px" colspan="1">{%for tem in info%} {{tem}} {%endfor%}</td>
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <br />
+    {% endfor %}
 </body>
 </html>

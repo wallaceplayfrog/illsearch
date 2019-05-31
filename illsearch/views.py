@@ -110,7 +110,36 @@ def probability(request):
         post_list6 = Complain.objects.filter(word3=result_cpl[1])
         for post in post_list6:
             post_list.append(post)
-        post_list = list(set(post_list))
+    if len(result_cpl) == 3:
+        post_list1 = Complain.objects.filter(word1=result_cpl[0])
+        for post in post_list1:
+            post_list.append(post)
+        post_list2 = Complain.objects.filter(word2=result_cpl[0])
+        for post in post_list2:
+            post_list.append(post)
+        post_list3 = Complain.objects.filter(word3=result_cpl[0])
+        for post in post_list3:
+            post_list.append(post)
+        post_list4 = Complain.objects.filter(word1=result_cpl[1])
+        for post in post_list4:
+            post_list.append(post)
+        post_list5 = Complain.objects.filter(word2=result_cpl[1])
+        for post in post_list5:
+            post_list.append(post)
+        post_list6 = Complain.objects.filter(word3=result_cpl[1])
+        for post in post_list6:
+            post_list.append(post)
+        post_list7 = Complain.objects.filter(word1=result_cpl[2])
+        for post in post_list7:
+            post_list.append(post)
+        post_list8 = Complain.objects.filter(word2=result_cpl[2])
+        for post in post_list8:
+            post_list.append(post)
+        post_list9 = Complain.objects.filter(word3=result_cpl[2])
+        for post in post_list9:
+            post_list.append(post)
+
+    post_list = list(set(post_list))
 
     if not post_list:
         error_msg = "未找到" + text + "的资料"
@@ -126,7 +155,6 @@ def probability(request):
         if post.word3 != "":
             man_complain_list.append(post.word3)
         complain_list.append(man_complain_list)
-    print(complain_list)
 
     all_ill_list = []
     for post in post_list:
@@ -143,8 +171,6 @@ def probability(request):
             all_ill_list.append(man_diagnose[0].ill5)
     all_ill_list = list(set(all_ill_list))
 
-    print(all_ill_list)
-
     ill_num_list = []
     for ill in all_ill_list:
         ill1_num = Diagnose.objects.filter(ill1=ill).count()
@@ -154,7 +180,6 @@ def probability(request):
         ill5_num = Diagnose.objects.filter(ill5=ill).count()
         ill_num = ill1_num + ill2_num + ill3_num + ill4_num + ill5_num
         ill_num_list.append(ill_num)
-    print(ill_num_list)
 
     ill_sum = 0
     for num in ill_num_list:
@@ -170,7 +195,6 @@ def probability(request):
         cir_num += 1
         if cir_num >= len(all_ill_list):
             break
-    print(info_list)
 
     return render(request, 'probability.html', {"title": "得病概率",
                                                 "man_complain": text,
@@ -181,5 +205,33 @@ def probability(request):
 def way(request):
 
     text = request.GET.get('text')
-    print(text)
-    return render(request, 'way.html', {"title": "解决办法"})
+    per = []
+    per_ill1 = Diagnose.objects.filter(ill1=text)
+    for tem in per_ill1:
+        per.append(tem.num)
+    per_ill2 = Diagnose.objects.filter(ill2=text)
+    for tem in per_ill2:
+        per.append(tem.num)
+    per_ill3 = Diagnose.objects.filter(ill3=text)
+    for tem in per_ill3:
+        per.append(tem.num)
+    per_ill4 = Diagnose.objects.filter(ill4=text)
+    for tem in per_ill4:
+        per.append(tem.num)
+    per_ill5 = Diagnose.objects.filter(ill5=text)
+    for tem in per_ill5:
+        per.append(tem.num)
+    per = list(set(per))
+
+    example = dia_list = dis_list = []
+    for num in per:
+        man_diagnose = Diagnose.objects.filter(num=num)
+        for tem in man_diagnose:
+            dia_list = [tem.ill1, tem.ill2, tem.ill3, tem.ill4, tem.ill5]
+
+        man_dispose = Dispose.objects.filter(num=num)
+        for tem in man_dispose:
+            dis_list = [tem.med1, tem.med2, tem.med3, tem.med4, tem.med5, tem.med6]
+        example.append([dia_list, dis_list])
+    return render(request, 'way.html', {"title": "解决办法",
+                                        "his_info": example})

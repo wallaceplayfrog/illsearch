@@ -19,22 +19,27 @@
             <td width="80px" colspan="2">{{man_complain}}</td>
         </tr>
 
+        <tr>
+            <td width="80px" height="50px" style="background-color:#ededed" >病症</td>
+            <td width="80px" height="50px" style="background-color:#ededed" >得病人数</td>
+            <td width="80px" height="50px" style="background-color:#ededed" >得病概率</td>
+
+        </tr>
+
         {% for post in all_info %}
         <tr>
             {% for one in post %}
-            <td width="80px"><a href="/way" name="text" methods="get">{{one}}</a></td>
+                {% ifequal forloop.counter 1 %}
+                    <td width="80px" height="30px"><a href="/way/?text={{one}}">{{one}}</a></td>
+                {% else %}
+                    <td width="80px" height="30px">{{one}}</td>
+                {% endifequal%}
             {% endfor %}        
         </tr>
-
         {% endfor %}
-
 
         </tbody>
     </table>
-        {{man_complain}}<br />
-
-
-
 
     {% endif %}
 
